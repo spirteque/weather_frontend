@@ -6,14 +6,21 @@ import Footer from "./components/Footer";
 import WeatherForecastTable from "./components/WeatherForecastTable";
 import Location from "./components/Location";
 import WeatherSummary from "./components/WeatherSummary";
+import Separator from "./components/Separator";
+import Spinner from "./components/Spinner";
+import isNumber from "lodash-es/isNumber";
 
 
 function App() {
 	const [location, setLocation] = useState({latitude: 0, longitude: 0});
 	const [initialLocation, setInitialLocation] = useState({latitude: 0, longitude: 0});
+	const [initialLocationLoading, setInitialLocationLoading] = useState(true);
 	const [weatherForecast, setWeatherForecast] = useState({})
+	const [weatherForecastLoading, setWeatherForecastLoading] = useState(true);
+	const [weatherForecastError, setWeatherForecastError] = useState(null);
 	const [weatherSummary, setWeatherSummary] = useState({})
-	const [error, setError] = useState(null);
+	const [weatherSummaryLoading, setWeatherSummaryLoading] = useState(true);
+	const [weatherSummaryError, setWeatherSummaryError] = useState(null);
 
 	useEffect(() => {
 		if ("geolocation" in navigator) {
@@ -25,25 +32,44 @@ function App() {
 					}
 					setLocation(currentLocation);
 					setInitialLocation(currentLocation);
+					setInitialLocationLoading(false);
 				},
 				(err) => {
-					setError(err.message);
-				}
+					const currentLocation = {latitude: 0, longitude: 0};
+
+					setLocation(currentLocation);
+					setInitialLocation(currentLocation)
+					setInitialLocationLoading(false);
+				},
 			);
-		} else {
-			setError("Geolocation is not supported by this browser.");
 		}
 	}, []);
 
 	useEffect(() => {
-		if (location.latitude && location.longitude) {
+		if (location.latitude !== '' && location.longitude !== '') {
 			const params = {latitude: location.latitude, longitude: location.longitude}
 
 			axios.get('/api/v1/week_forecast', {params})
-				.then(response => setWeatherForecast(response.data))
+				.then(response => {
+					setWeatherForecast(response.data);
+					setWeatherForecastLoading(false);
+				})
+				.catch(e => {
+					setWeatherForecastError(e);
+					setWeatherForecast({});
+					setWeatherForecastLoading(false);
+				})
 
 			axios.get('api/v1/week_summary', {params})
-				.then(response => setWeatherSummary(response.data));
+				.then(response => {
+					setWeatherSummary(response.data);
+					setWeatherSummaryLoading(false);
+				})
+				.catch(e => {
+					setWeatherSummary({});
+					setWeatherSummaryError(e);
+					setWeatherSummaryLoading(false);
+				});
 		}
 	}, [location]);
 
@@ -51,14 +77,23 @@ function App() {
 		<div className="h-100 d-flex flex-column">
 			<Navigation/>
 			<div className="container flex-grow-1 my-3">
-				<Location location={location} initialLocation={initialLocation} handleLocation={setLocation}/>
-				<WeatherForecastTable weatherForecast={weatherForecast}/>
-				<hr className="my-4"/>
-				<WeatherSummary weatherSummary={weatherSummary}/>
+				{initialLocationLoading
+					? <Spinner fullHeight={true}/>
+					: (<>
+							<Location location={location}
+									  initialLocation={initialLocation}
+									  handleLocation={setLocation}
+									  initialLocationLoading={initialLocationLoading}/>
+							<Separator/>
+							<WeatherForecastTable weatherForecast={weatherForecast} weatherForecastLoading={weatherForecastLoading}/>
+							<Separator/>
+							<WeatherSummary weatherSummary={weatherSummary} weatherSummaryLoading={weatherSummaryLoading}/>
+						</>)}
 			</div>
 			<Footer/>
 		</div>
-	);
+	)
+		;
 }
 
 export default App;

@@ -1,15 +1,16 @@
 import {useEffect, useState} from "react";
+import isNumber from "lodash-es/isNumber";
 
 export default function Location({location, initialLocation, handleLocation}) {
 	const [latitude, setLatitude] = useState('')
 	const [longitude, setLongitude] = useState('')
 
 	useEffect(() => {
-		if (location.latitude) {
+		if (isNumber(location.latitude)) {
 			setLatitude(`${location.latitude}`)
 		}
 
-		if (location.longitude) {
+		if (isNumber(location.longitude)) {
 			setLongitude(`${location.longitude}`)
 		}
 	}, [location]);
@@ -17,7 +18,7 @@ export default function Location({location, initialLocation, handleLocation}) {
 	return (
 		<>
 			<div className="row mb-5">
-				<div className="col-12 col-md-6 col-lg-6">
+				<div className="col-12 col-md-6 col-lg-6 mb-5 mb-md-0">
 					<h3>Your location</h3>
 					<div className="overflow-hidden rounded">
 						<table className="table table-striped mb-0">
@@ -35,6 +36,7 @@ export default function Location({location, initialLocation, handleLocation}) {
 							</tbody>
 						</table>
 					</div>
+
 				</div>
 				<div className="col-12 col-md-6 col-lg-6">
 					<h3>Selected location</h3>
