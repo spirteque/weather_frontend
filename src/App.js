@@ -51,6 +51,7 @@ function App() {
 
 			axios.get('/api/v1/week_forecast', {params})
 				.then(response => {
+					setWeatherForecastError(null)
 					setWeatherForecast(response.data);
 					setWeatherForecastLoading(false);
 				})
@@ -62,6 +63,7 @@ function App() {
 
 			axios.get('api/v1/week_summary', {params})
 				.then(response => {
+					setWeatherSummaryError(null);
 					setWeatherSummary(response.data);
 					setWeatherSummaryLoading(false);
 				})
@@ -85,9 +87,13 @@ function App() {
 									  handleLocation={setLocation}
 									  initialLocationLoading={initialLocationLoading}/>
 							<Separator/>
-							<WeatherForecastTable weatherForecast={weatherForecast} weatherForecastLoading={weatherForecastLoading}/>
+							<WeatherForecastTable weatherForecast={weatherForecast}
+												  weatherForecastLoading={weatherForecastLoading}
+												  weatherForecastError={weatherForecastError}/>
 							<Separator/>
-							<WeatherSummary weatherSummary={weatherSummary} weatherSummaryLoading={weatherSummaryLoading}/>
+							<WeatherSummary weatherSummary={weatherSummary}
+											weatherSummaryLoading={weatherSummaryLoading}
+											weatherSummaryError={weatherSummaryError}/>
 						</>)}
 			</div>
 			<Footer/>
