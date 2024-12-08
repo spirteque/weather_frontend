@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css'; //https://create-react-app.dev/docs/adding-bootstrap/
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';

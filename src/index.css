@@ -1,0 +1,12 @@
+html, body, #root {
+    height: 100%;
+    font-family: "Raleway", "Segoe UI", sans-serif;
+    font-synthesis: none !important; /*https://stackoverflow.com/questions/9450706/safari-font-weight-issue-text-too-bold*/
+}
+
+.bg-blue-900 {
+    color: #fff;
+    background-color: #031633;
+    --bs-table-bg:#031633;
+    --bs-table-color: #fff
+}
