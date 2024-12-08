@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import isNumber from "lodash-es/isNumber";
 
+// TODO input validation
+
 export default function Location({location, initialLocation, handleLocation}) {
 	const [latitude, setLatitude] = useState('')
 	const [longitude, setLongitude] = useState('')

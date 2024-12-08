@@ -8,8 +8,8 @@ import Location from "./components/Location";
 import WeatherSummary from "./components/WeatherSummary";
 import Separator from "./components/Separator";
 import Spinner from "./components/Spinner";
-import isNumber from "lodash-es/isNumber";
 
+// TODO refactor
 
 function App() {
 	const [location, setLocation] = useState({latitude: 0, longitude: 0});
