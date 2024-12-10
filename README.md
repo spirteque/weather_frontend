@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Weather Application with Photovoltaic Energy Forecast
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Description
 
-## Available Scripts
+This React application fetches and displays weather forecasts and photovoltaic energy estimates for the upcoming 7 days. The application is integrated with the [FastAPI backend](https://github.com/spirteque/weather_backend.git) and offers two main functionalities:
+1. Automatically fetches user's current location (if browser allows) to display the weather data for that location.
+2. Allows users to manually input geographic coordinates to get weather data for any desired location.
 
-In the project directory, you can run:
+The weather data is displayed in a user-friendly format by intuitive tables and icons which represent conditions such as temperature or sunshine duration.
 
-### `npm start`
+## Main Features and Workflow
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Geolocation**: Automatically detects user's location using browser's geolocation API. If permission is denied or unavailable, default coordinates are used (`latitude: 0, longitude: 0`).
+- **Dynamic API Requests**: Requests are sent to the FastAPI backend whenever the location changes (using Axios).
+  - `/api/v1/week_forecast`: 7-day weather forecast and estimated energy production,
+  - `/api/v1/week_summary`: summary of weekly weather conditions.
+- **User Interactions**:
+  - Users can manually update their location through a form,
+  - The weather data is updated dynamically based on the provided coordinates.
+- **Error and Loading Handling**:
+  - Spinner is displayed during data loading,
+  - Error messages are shown in case of API error.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Components Overview
 
-### `npm test`
+### Main Components:
+1. **`Location`**: Allows user to view or update geographic coordinates.
+2. **`WeatherForecastTable`**: Displays weekly weather forecast in a table format.
+3. **`WeatherSummary`**: Shows a weather summary for the week.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Data Flow:
+  - `location` and `initialLocation`: Current and initial geographic coordinates.
+  - `weatherForecast` and `weatherSummary`: API responses for forecast and summary.
+  - `weatherForecastLoading`, `weatherSummaryLoading`: Loading states for each API request.
+  - `weatherForecastError`, `weatherSummaryError`: API errors.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Technologies Used
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React 19.0.0
+- Bootstrap 5.3.3 (CSS styling)
+- Axios (API calls)
+- Font Awesome (weather icons)
+- Lodash (utility functions)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### Installation and Launch
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### Clone the repository:
+```bash
+git clone https://github.com/spirteque/weather_frontend.git
+cd weather_frontend
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Install dependencies:
+```bash
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Start the development server:
+```bash
+npm run start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Build application
+```bash
+npm run build
+```
 
-## Learn More
+The application will be available at http://localhost:3000.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Deployment
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The application is publicly accessible.  
+Visit: [weather.spirteque.com](https://www.weather.spirteque.com)
 
-### Code Splitting
+## Notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- The application does not require API keys or environment variables since all external API calls are managed by the [FastAPI backend](https://github.com/spirteque/weather_backend.git).
+- Currently, no tests are implemented.
+- **Future Improvements**:
+  - Implementing tests,
+  - Dark Mode,
+  - Map with location selection.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
