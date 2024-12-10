@@ -83,9 +83,7 @@ export default function WeatherForecastTable({weatherForecast, weatherForecastLo
 						</tr>
 						<tr>
 							<th scope="row">
-						<span>
-							Generated<br/> energy [{weatherForecast.generated_energy_unit}]
-						</span>
+								<span> Generated<br/> energy [{weatherForecast.generated_energy_unit}]</span>
 							</th>
 							{weatherForecast.days?.map(day => {
 								return (

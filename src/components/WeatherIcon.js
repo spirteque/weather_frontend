@@ -24,5 +24,4 @@ export default function WeatherIcon({weatherType, size}) {
 		case 'THUNDERSTORM': return (<FontAwesomeIcon icon={faCloudBolt} size={size}/>)
 		case 'THUNDERSTORM_WITH_HAIL': return (<FontAwesomeIcon icon={faCloudBolt} size={size}/>)
 	}
-
 }

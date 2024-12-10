@@ -1,6 +1,8 @@
+/* Make website take full available height */
 html, body, #root {
     height: 100%;
     font-family: "Raleway", "Segoe UI", sans-serif;
+    /* Without this property font was displayed differently across browsers */
     font-synthesis: none !important; /*https://stackoverflow.com/questions/9450706/safari-font-weight-issue-text-too-bold*/
 }
 

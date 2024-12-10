@@ -1,4 +1,3 @@
-import './App.css';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import Navigation from "./components/Navigation";
@@ -98,8 +97,7 @@ function App() {
 			</div>
 			<Footer/>
 		</div>
-	)
-		;
+	);
 }
 
 export default App;
