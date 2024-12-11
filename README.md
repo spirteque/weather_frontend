@@ -74,12 +74,13 @@ The application will be available at http://localhost:3000.
 The application is publicly accessible.  
 Visit: [weather.spirteque.com](https://www.weather.spirteque.com)
 
+## Tests
+E2E tests are available: [weather_e2e](https://github.com/spirteque/weather_e2e)
+
 ## Notes
 
 - The application does not require API keys or environment variables since all external API calls are managed by the [FastAPI backend](https://github.com/spirteque/weather_backend.git).
-- Currently, no tests are implemented.
 - **Future Improvements**:
-  - Implementing tests,
   - Dark Mode,
   - Map with location selection.
 
